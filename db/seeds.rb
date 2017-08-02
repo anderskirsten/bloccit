@@ -7,7 +7,14 @@ require 'random_data'
        ) 
 end
 
+Post.find_or_create_by!(
+    title: "Unique Post",
+    body: "Unique post body"
+    )
+    
 posts = Post.all
+
+unique_post = posts.where(title: "Unique Post")
 
 100.times do
    Comment.create!(
@@ -15,6 +22,11 @@ posts = Post.all
        body: RandomData.random_paragraph
        ) 
 end
+    
+Comment.find_or_create_by!(
+    post: unique_post,
+    body: "Unique comment body"
+    )
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
