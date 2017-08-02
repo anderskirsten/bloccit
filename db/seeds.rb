@@ -14,7 +14,7 @@ Post.find_or_create_by!(
     
 posts = Post.all
 
-unique_post = posts.where(title: "Unique Post")
+unique_post = posts.find_by(title: "Unique Post")
 
 100.times do
    Comment.create!(
