@@ -4,7 +4,7 @@ RSpec.describe PostsController, type: :controller do
   
   let(:my_post) { Post.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
 
-  describe "GET #index" do
+  describe "GET index" do
     it "returns http success" do
       get :index
       expect(response).to have_http_status(:success)
@@ -55,7 +55,7 @@ RSpec.describe PostsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
     
-    it "renders the #show view" do
+    it "renders the show view" do
       get :show, {id: my_post.id}
       expect(response).to render_template :show
     end
