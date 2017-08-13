@@ -1,4 +1,4 @@
-class QuestionController < ApplicationController
+class QuestionsController < ApplicationController
   def index
     @questions = Question.all
   end
@@ -31,7 +31,7 @@ class QuestionController < ApplicationController
   end
 
   def update
-    @question = Question.new
+    @question = Question.find(params[:id])
     @question.title = params[:question][:title]
     @question.body = params[:question][:body]
     @question.resolved = params[:question][:resolved]
@@ -48,7 +48,7 @@ class QuestionController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     
-    if @questiont.destroy
+    if @question.destroy
       flash[:notice] = "\"#{@question.title}\" was deleted successfully."
       redirect_to questions_path
     else
