@@ -24,6 +24,14 @@ RSpec.describe User, type: :model do
       end
   end
   
+  describe "name attribute" do
+     name = "steve jobs"
+     
+     it "should be properly formatted" do
+         expect((name.split).each {|word| word.capitalize!}.join(" ")).to eq("Steve Jobs")
+     end
+  end
+  
   describe "invalid user" do
      let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
      let(:user_with_invalid_email) { User.new(name: "Bloccit User", email: "") }
