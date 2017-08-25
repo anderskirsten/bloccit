@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  
+  let(:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
   let(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
-  let(:my_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
+  let(:my_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user) }
   
   describe "GET new" do
     it "returns http success" do
@@ -23,7 +23,7 @@ RSpec.describe PostsController, type: :controller do
   end
    
   describe "POST create" do
-   it "increases the number of POST by 1" do
+   it "increases the number of posts by 1" do
      expect { post :create, topic_id: my_topic.id, post: { title: RandomData.random_sentence, body: RandomData.random_paragraph }}.to change(Post,:count).by(1)
    end
    
