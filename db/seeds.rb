@@ -26,15 +26,8 @@ topics = Topic.all
        body: RandomData.random_paragraph
        ) 
 end
-
-Post.find_or_create_by!(
-    title: "Unique Post",
-    body: "Unique post body"
-    )
     
 posts = Post.all
-
-unique_post = posts.find_by(title: "Unique Post")
 
 100.times do
    Comment.create!(
@@ -42,19 +35,6 @@ unique_post = posts.find_by(title: "Unique Post")
        body: RandomData.random_paragraph
        ) 
 end
-    
-Comment.find_or_create_by!(
-    post: unique_post,
-    body: "Unique comment body"
-    )
-
-#20.times do
- #  Question.create!(
-  #     title: RandomData.random_sentence,
-   #    body: RandomData.random_paragraph,
-    #   resolved: false
-     #  )  
-#end
 
 user = User.first
 user.update_attributes!(
@@ -67,4 +47,3 @@ puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
-#puts "#{Question.count} questions created"
