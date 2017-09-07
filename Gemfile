@@ -34,3 +34,6 @@
  
  # used for encrypting user passwords
  gem 'bcrypt'
+ 
+ # used to access and store credentials as environmental variables
+  gem 'figaro', '1.0'

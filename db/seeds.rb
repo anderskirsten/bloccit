@@ -54,6 +54,12 @@ member = User.create!(
   password: 'helloworld'
 )
 
+test_user = User.create!(
+  name:     'Test User',
+  email:    'anders.kirsten@gmail.com',
+  password: 'testworld'
+)
+
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
