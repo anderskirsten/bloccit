@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Post, type: :model do
   let(:topic) { create(:topic) }
   let(:user) { create(:user) }
-  let(:post) { create(:post) }
+  let(:post) { create(:post, user: user) }
   
   it {is_expected.to have_many(:comments) }
   it {is_expected.to have_many(:votes) }
