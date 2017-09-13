@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
   
   it { is_expected.to have_many(:posts) }
   it { is_expected.to have_many(:comments) }
@@ -94,20 +95,23 @@ RSpec.describe User, type: :model do
   
   describe "#favorite_for(post)" do
      before do
-        topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
-        @post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+        topic = create(:topic)
+        @post = create(:post, topic: topic, user: user)
      end
      
-     # NEED TO REFACTOR THESE TESTS TO ACCOUNT FOR AUTOFAVORITING ON NEW POSTS
+     it "returns 'nil' if the other_user has not favorited the post" do
+        expect(other_user.favorite_for(@post)).to be_nil 
+     end
      
-     #it "returns 'nil' if the user has not favorited the post" do
-      #  expect(user.favorite_for(@post)).to be_nil 
-     #end
+     it "returns the appropriate favorite if it exists" do
+        favorite = other_user.favorites.where(post: @post).create
+        expect(other_user.favorite_for(@post)).to eq(favorite)
+     end
      
-     #it "returns the appropriate favorite if it exists" do
-      #  favorite = user.favorites.where(post: @post).create
-       # expect(user.favorite_for(@post)).to eq(favorite)
-     #end
+     it "adds the favorite to the user account" do
+        favorite = other_user.favorites.where(post: @post).create
+        expect(other_user.favorites.any?).not_to be_nil
+     end
   end
   
   describe ".avatar_url" do

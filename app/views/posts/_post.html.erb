@@ -1,12 +1,22 @@
-<div class="media">
+<div class="media row">
     <%= render partial: 'votes/voting', locals: { post: post } %>
     <div class="media-body">
         <h4 class="media-heading">
             <%= link_to post.title, topic_post_path(post.topic, post) %>
         </h4>
         <small>
-            submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> </br>
-            <%= post.comments.count %> Comments
+            submitted <%= time_ago_in_words(post.created_at) %> ago </br>
+        </small>
+        <% avatar_url = post.user.avatar_url(40) %>
+        <% if avatar_url %>
+        <% end %>
+    </div>
+    <div class="col-md-6 summary-block">
+        <%= image_tag avatar_url, class: 'media-object pull-left' %>
+        <small class="post-summary">
+            Author: <%= link_to post.user.name, user_path(post.user) %> <br/>
+            Votes: <%= post.votes.count %> <br/>
+            Comments: <%= post.comments.count %>
         </small>
     </div>
 </div>
