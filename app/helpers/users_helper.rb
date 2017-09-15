@@ -1,13 +1,13 @@
 module UsersHelper
-    def user_has_favorites?
-        current_user.favorites 
+    def has_favorites?(user)
+        user.favorites 
     end
     
-    def user_has_comments?
-        current_user.comments
+    def has_comments?(user)
+        user.comments
     end
     
-    def user_has_posts?
-        current_user.posts
+    def has_posts?(user)
+        user.posts
     end
 end
